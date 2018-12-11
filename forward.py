@@ -15,11 +15,9 @@ def forward_propagation(x, wh, wo):
 
 if __name__ == '__main__':
     m, l, n, x, y = read()
-    # x = normalize_all(x)
-    # y = normalize(y)
+    x = normalize_all(x)
+    y = normalize(y)
     wo, wh = load_weights()
-    # print(wo)
-    # print(wh)
     y_hat = forward_propagation(x, wh, wo)
     print(y_hat)
     print(sum_error(y, y_hat))

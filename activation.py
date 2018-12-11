@@ -9,4 +9,3 @@ def sigmoid(x):
 def sigmoid_dash(x):
     return x * (1 - x)
 
-# print(relu(np.array([-1, 0, 1])))
