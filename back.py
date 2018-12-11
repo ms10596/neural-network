@@ -3,7 +3,7 @@ import numpy as np
 
 from activation import sigmoid, sigmoid_dash
 from input import read, save
-from normalize import normalize_all, normalize
+from normalize import normalize, normalize_all
 
 
 def sum_error(sigma):
@@ -28,7 +28,7 @@ def backpropagation(x, y, wo, wh):
         error = sum_error(sigma)
 
         mses.append(error)
-        if mses[-1] < 3:
+        if mses[-1] < 10:
             return mses, wo, wh
 
         sigma_o = np.dot(sigma.T, net_h)  # == > 1 * 10
@@ -39,4 +39,18 @@ def backpropagation(x, y, wo, wh):
         wh = wh + 0.0001 * sigma_h  # == > 10 * 8
 
 
-
+if __name__ == '__main__':
+    np.random.seed(1)
+    m, l, n, x, y = read()
+    # m ==> 8
+    # l ==> 10
+    # n ==> 1
+    wh = np.random.uniform(low=-5, high=5, size=(l, m))  # 10 * 8
+    wo = np.random.uniform(low=-5, high=5, size=(n, l))  # 1 * 10
+    x = normalize_all(x)
+    y = normalize(y)
+    mses, wo, wh = backpropagation(x, y, wo, wh)
+    save(wo, wh)
+    plt.plot(mses)
+    print(mses[-1])
+    plt.show()

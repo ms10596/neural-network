@@ -19,5 +19,4 @@ if __name__ == '__main__':
     y = normalize(y)
     wo, wh = load_weights()
     y_hat = forward_propagation(x, wh, wo)
-    print(y_hat)
     print(sum_error(y, y_hat))
